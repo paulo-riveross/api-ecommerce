@@ -9,7 +9,7 @@ const options = {
       version: "1.0.0",
       description: "Documentación de la API de gestión de usuarios",
     },
-    servers: [{ url: "http://localhost:8080/api" }],
+    servers: [{ url: "https://back-jwt.onrender.com/api" }],
     components: {
       securitySchemes: {
         bearerAuth: {
