@@ -1,12 +1,13 @@
 // routes/productRoutes.js
 import express from 'express';
+import { upload } from "../middlewares/uploadImage.js";
 import {
   createProduct,
-  getProducts,
+  getAllProducts,
   getProductById,
   updateProduct,
   deleteProduct
-} from '../controllers/productController.js';
+} from '../controllers/product.controller.js';
 import { auth, isAdmin } from '../middlewares/auth.js';
 
 const router = express.Router();
@@ -39,7 +40,7 @@ const router = express.Router();
  *       200:
  *         description: Lista de productos
  */
-router.get('/', getProducts);
+router.get('/', getAllProducts);
 
 /**
  * @swagger
@@ -100,7 +101,7 @@ router.get('/:id', getProductById);
  *       403:
  *         description: Acceso denegado
  */
-router.post('/', auth, isAdmin, createProduct);
+router.post('/', auth, isAdmin, upload.single("image"), createProduct);
 
 /**
  * @swagger
@@ -168,5 +169,37 @@ router.put('/:id', auth, isAdmin, updateProduct);
  *         description: Producto no encontrado
  */
 router.delete('/:id', auth, isAdmin, deleteProduct);
+
+/**
+ * @swagger
+ * /api/products/upload:
+ *   post:
+ *     summary: Subir imagen de producto (Cloudinary)
+ *     tags: [Productos]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Imagen subida con éxito
+ */
+router.post(
+  "/upload",
+  auth,
+  isAdmin,
+  upload.single("image"),
+  (req, res) => {
+    const imageUrl = req.file.path; // URL directa desde Cloudinary
+    res.status(200).json({ imageUrl });
+  }
+);
 
 export default router;

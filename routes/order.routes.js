@@ -4,7 +4,7 @@ import {
   getUserOrders,
   getAllOrders,
 } from "../controllers/order.controller.js";
-import { auth, checkRole } from "../middleware/auth.js";
+import { auth, isAdmin } from "../middlewares/auth.js";
 
 const router = express.Router();
 
@@ -61,6 +61,6 @@ router.get("/", auth, getUserOrders);
  *       403:
  *         description: No autorizado
  */
-router.get("/all", auth, checkRole(["admin"]), getAllOrders);
+router.get("/all", auth, isAdmin, getAllOrders);
 
 export default router;

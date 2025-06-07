@@ -4,9 +4,9 @@ import {
   getUserById,
   updateUser,
   deleteUser,
-} from "../controller/admin.controller.js";
-import { auth } from "../middleware/auth.js";
-import { authorizeRole } from "../middleware/roles.js";
+} from "../controllers/admin.controller.js";
+import { auth } from "../middlewares/auth.js";
+import { authorizeRole } from "../middlewares/roles.js";
 
 const router = express.Router();
 

@@ -1,15 +1,25 @@
-import Product from "../models/product.model";
+import Product from "../models/product.model.js";
 
 export const createProduct = async (req, res) => {
-    try {
-        const newProduct = new Product(req.body);
-        const saved = await newProduct.save();
-        res.status(201).json(saved);
-    } catch (err) {
-        res.status(500).json({ message: "Error al crear el producto", error: err.message });
-    }
-}
+  try {
+    const { title, description, price, stock, category } = req.body;
 
+    const imageUrl = req.file?.path; 
+    const newProduct = new Product({
+      title,
+      description,
+      price,
+      stock,
+      category,
+      images: imageUrl ? [imageUrl] : [],
+    });
+
+    const saved = await newProduct.save();
+    res.status(201).json(saved);
+  } catch (error) {
+    res.status(400).json({ message: "Error al crear producto", error: error.message });
+  }
+};
 
 export const getAllProducts = async (req, res) => {
     try {
