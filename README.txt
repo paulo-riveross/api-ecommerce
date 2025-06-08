@@ -1,60 +1,153 @@
-# Back-JWT
+Sure! Here's the updated `README.md` in **English**, including Cloudinary support:
 
-API RESTful para gestión de usuarios, productos, carrito y órdenes, con autenticación JWT y documentación Swagger.
+---
 
-## Características
+# 🛒 E-Commerce API
 
-- Registro e inicio de sesión de usuarios con JWT
-- Roles de usuario y administrador
-- CRUD de productos (solo admin puede crear/editar/eliminar)
-- Carrito de compras por usuario autenticado
-- Creación y consulta de órdenes
-- Documentación interactiva con Swagger en `/api-docs`
+A RESTful API for an online store built with **Node.js**, **Express**, and **MongoDB**. It includes JWT authentication, product and order management, shopping carts, image uploads via **Cloudinary**, security middleware, and Swagger documentation.
 
-## Instalación
+---
 
-1. Clona el repositorio.
-2. Instala dependencias:
+## 🚀 Technologies Used
 
-   ```sh
+* **Node.js** + **Express**
+* **MongoDB** + **Mongoose**
+* **JWT (JSON Web Tokens)**
+* **Cloudinary** (image hosting)
+* **Swagger (OpenAPI)**
+* **Helmet** + **CORS**
+* **Rate Limiting**
+
+---
+
+## 📦 Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone 
+   cd your-repo
+   ```
+
+2. Install dependencies:
+
+   ```bash
    npm install
    ```
 
-3. Crea un archivo `.env` con tus variables de entorno (ver ejemplo en el repo).
+3. Create a `.env` file and add your environment variables:
 
-## Variables de entorno
+   ```
+   PORT=5000
+   MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/your-db
+   JWT_SECRET=your_jwt_secret
 
-- `MONGO_URI`: URL de conexión a MongoDB
-- `JWT_SECRET`: Secreto para firmar JWT
-- `PORT`: Puerto del servidor (opcional, por defecto 5000)
+   CLOUDINARY_CLOUD_NAME=your_cloud_name
+   CLOUDINARY_API_KEY=your_api_key
+   CLOUDINARY_API_SECRET=your_api_secret
+   ```
 
-## Uso
+4. Start the server:
 
-Inicia el servidor en modo desarrollo:
+   ```bash
+   npm run dev
+   ```
 
-```sh
-npm run dev
+---
+
+## 📚 Main Endpoints
+
+| Base Route      | Description                                             |
+| --------------- | ------------------------------------------------------- |
+| `/api/auth`     | User registration, login, and current user info         |
+| `/api/admin`    | Admin routes (user & product control)                   |
+| `/api/products` | Public CRUD operations for products (with image upload) |
+| `/api/cart`     | Manage shopping carts                                   |
+| `/api/orders`   | Create and track orders                                 |
+| `/debug`        | Debug route to inspect request body                     |
+
+---
+
+## 🖼️ Image Uploads with Cloudinary
+
+This project uses **Cloudinary** to handle product image uploads.
+
+* Images are uploaded through the product endpoints (`/api/products`).
+* The returned Cloudinary `secure_url` and `public_id` are stored in MongoDB.
+* Uploads are handled using `multer` or `form-data` via a POST request.
+
+### 🔧 Example: Uploading an image via Postman
+
+* Endpoint: `POST /api/products`
+* Body type: `form-data`
+* Fields:
+
+  * `name` – Product name
+  * `price` – Product price
+  * `image` – Type: `File` → Choose an image from your computer
+
+---
+
+## 🔐 Security Features
+
+* **Helmet**: Sets secure HTTP headers
+* **CORS**: Configures cross-origin requests
+* **Rate Limiting**:
+
+  * Global rate limit for all `/api/` routes
+  * Additional protection for `/api/auth` and `/api/admin`
+
+---
+
+## 📊 API Documentation (Swagger)
+
+Once the server is running, access Swagger UI at:
+
+```
+http://localhost:5000/api-docs
 ```
 
-O en modo producción:
+You can test and explore all endpoints from there.
 
-```sh
-npm start
+---
+
+## 📁 Project Structure
+
+```
+├── config/
+│   ├── db.js
+│   └── cloudinary.js
+├── routes/
+│   ├── auth.routes.js
+│   ├── admin.routes.js
+│   ├── product.routes.js
+│   ├── cart.routes.js
+│   └── order.routes.js
+├── controllers/
+│   └── productController.js (includes Cloudinary logic)
+├── middlewares/
+│   ├── ratelimit.js
+│   └── security.js
+├── swagger.js
+├── .env
+├── app.js
+└── package.json
 ```
 
-## Endpoints principales
+---
 
-- `POST /api/auth/register` — Registro de usuario
-- `POST /api/auth/login` — Login y obtención de token
-- `GET /api/auth/profile` — Perfil del usuario autenticado
-- `GET /api/products` — Listar productos
-- `POST /api/products` — Crear producto (admin)
-- `GET /api/cart` — Ver carrito
-- `POST /api/cart` — Agregar al carrito
-- `POST /api/orders` — Crear orden
+## 🧪 Testing (Coming Soon)
 
-Consulta la documentación Swagger en [http://localhost:8080/api-docs](http://localhost:8080/api-docs) para ver todos los endpoints y probarlos.
 
-## Licencia
+---
 
-MIT
+## ☁️ Deployment Ready
+
+This API can be deployed to platforms like:
+
+* [Render](https://render.com)
+* [Railway](https://railway.app)
+* [Vercel](https://vercel.com) (for serverless functions)
+
+---
+

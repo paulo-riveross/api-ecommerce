@@ -5,11 +5,11 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "API de Usuarios",
+      title: "API E-Commerce",
       version: "1.0.0",
-      description: "Documentación de la API de gestión de usuarios",
+      description: "Documentación de la API de gestión de usuarios, productos, carritos y ordenes",
     },
-    servers: [{ url: "localhost:8080/api"}],
+    servers: [{ url: "http://localhost:8080"}],
     components: {
       securitySchemes: {
         bearerAuth: {
