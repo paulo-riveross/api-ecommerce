@@ -9,7 +9,7 @@ const options = {
       version: "1.0.0",
       description: "Documentación de la API de gestión de usuarios, productos, carritos y ordenes",
     },
-    servers: [{ url: "http://localhost:8080"}],
+    servers: [{ url: "http://localhost:8080/"}],
     components: {
       securitySchemes: {
         bearerAuth: {
