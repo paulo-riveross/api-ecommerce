@@ -8,7 +8,7 @@ export const securityHeaders = helmet();
 export const corsConfig = cors({
   origin: [
     "http://localhost:5173",  // frontend local con Vite
-    // "https://mi-front-produccion.com"  // dominio en producción
+    "https://api-ecommerce-weqz.onrender.com/api-docs/"  // dominio en producción
   ],
   credentials: true, // permite enviar cookies o headers con credenciales
 });
