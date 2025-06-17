@@ -1,4 +1,3 @@
-Sure! Here's the updated `README.md` in **English**, including Cloudinary support:
 
 ---
 
